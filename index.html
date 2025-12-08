@@ -1,0 +1,493 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estrategia GAV 2026: Informe Final</title>
+    
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels@2.0.0"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-annotation@2.1.0"></script> <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    
+    <style>
+        body { font-family: 'Inter', sans-serif; scroll-behavior: smooth; }
+        .hero-bg { background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%); }
+        .card-shadow { box-shadow: 0 10px 30px -5px rgba(0, 0, 0, 0.1); }
+        .slider-thumb::-webkit-slider-thumb { -webkit-appearance: none; appearance: none; width: 24px; height: 24px; background: #2563eb; border: 4px solid white; box-shadow: 0 4px 6px rgba(0,0,0,0.1); border-radius: 50%; cursor: pointer; transition: transform 0.1s; }
+        .slider-thumb::-webkit-slider-thumb:hover { transform: scale(1.1); }
+        details > summary { list-style: none; }
+        details > summary::-webkit-details-marker { display: none; }
+    </style>
+</head>
+<body class="bg-slate-50 text-slate-800">
+
+    <nav class="fixed w-full z-50 bg-white/95 backdrop-blur border-b border-slate-200 shadow-sm">
+        <div class="max-w-7xl mx-auto px-6 py-4 flex justify-between items-center overflow-x-auto">
+            <div class="font-bold text-xl text-slate-900 tracking-tight mr-8">Estrategia GAV Vitra <span class="text-blue-600">2026</span></div>
+            <div class="flex gap-6 text-sm font-medium text-slate-500 whitespace-nowrap">
+                <a href="#resumen" class="hover:text-blue-600 transition">Resumen</a>
+                <a href="#gestion" class="hover:text-blue-600 transition">Impacto</a>
+                <a href="#estructura" class="hover:text-blue-600 transition">Detalle</a>
+                <a href="#simulador" class="text-blue-600 font-bold bg-blue-50 px-3 py-1 rounded-full">Simulador</a>
+            </div>
+        </div>
+    </nav>
+
+    <header class="hero-bg min-h-[50vh] flex items-center justify-center text-white pt-24 pb-20">
+        <div class="max-w-5xl mx-auto px-6 text-center">
+            <span class="inline-block px-3 py-1 border border-blue-400/30 rounded-full bg-blue-500/10 text-blue-300 text-xs font-bold tracking-widest uppercase mb-6">Plan de Eficiencia GAV</span>
+            <h1 class="text-4xl md:text-6xl font-extrabold tracking-tight mb-6 leading-tight">
+                Optimización Estructural <br>
+                <span class="text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-emerald-400">Ante baja en toneladas despachadas 2026</span>
+            </h1>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-8">
+                Estrategia para reducir el gasto fijo y neutralizar el impacto de la caída a 155k toneladas.
+            </p>
+        </div>
+    </header>
+
+    <section id="resumen" class="py-16 bg-white relative -mt-16 z-20 mx-4 md:mx-6 rounded-3xl shadow-xl border border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-12 gap-12">
+                <div class="md:col-span-7 flex flex-col justify-center">
+                    <h3 class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-2">Resumen Ejecutivo</h3>
+                    <h2 class="text-3xl font-extrabold text-slate-900 mb-6">El "Empate Técnico" como Victoria</h2>
+                    <p class="text-lg text-slate-600 mb-6 leading-relaxed">
+                        La caída del <span class="font-bold text-red-500">29% en volumen</span> amenazaba con disparar nuestros costos unitarios. 
+                        La intervención de ahorro por <strong>$1.876 MM</strong> neutraliza este efecto, manteniendo la eficiencia operativa.
+                    </p>
+                    <div class="grid grid-cols-3 gap-4 border-t border-slate-100 pt-6">
+                        <div>
+                            <p class="text-xs text-slate-400 uppercase font-bold">Gasto Base 2025</p>
+                            <p class="text-2xl font-bold text-slate-400">$6.791 MM</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-slate-400 uppercase font-bold">Meta Gasto 2026</p>
+                            <p class="text-2xl font-bold text-slate-900">$4.915 MM</p>
+                        </div>
+                        <div>
+                            <p class="text-xs text-emerald-600 uppercase font-bold">Ahorro Neto</p>
+                            <p class="text-2xl font-bold text-emerald-600">$1.876 MM</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="md:col-span-5 bg-slate-50 rounded-2xl p-6 border border-slate-100 relative">
+                    <h4 class="text-sm font-bold text-slate-700 mb-4 text-center">Composición del Ahorro</h4>
+                    <div class="h-[220px] relative">
+                        <canvas id="executiveChart"></canvas>
+                        <div class="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
+                            <span class="text-3xl font-bold text-slate-800">28%</span>
+                            <span class="text-xs text-slate-500 uppercase font-medium">Reducción</span>
+                        </div>
+                    </div>
+                    <div class="mt-4 flex justify-center gap-4 text-xs text-slate-500">
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-blue-600"></span> Ventas</span>
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-500"></span> Instalaciones</span>
+                        <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-amber-500"></span> Dotación</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gestion" class="py-16 bg-slate-900 text-white mt-8">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="grid md:grid-cols-2 gap-12 items-center">
+                <div>
+                    <span class="text-amber-400 font-bold text-xs tracking-widest uppercase mb-2 inline-block">Valor de la Gestión</span>
+                    <h2 class="text-3xl font-extrabold mb-4">¿Qué pasaría sin este plan?</h2>
+                    <p class="text-slate-300 text-lg mb-6">
+                        Si mantenemos la estructura 2025 con el volumen bajo de 2026, el Costo Unitario subiría a <span class="text-red-400 font-bold">$43.812</span> por la carga fija.
+                    </p>
+                    <p class="text-slate-300 mb-8">
+                        El plan reduce esa carga fija (barra azul), logrando un costo de <strong>$31.711</strong>.
+                    </p>
+                    <div class="flex gap-4 text-xs font-bold uppercase tracking-wide border-t border-slate-700 pt-4">
+                        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded bg-blue-500"></span> Fijo (Estructura)</div>
+                        <div class="flex items-center gap-2"><span class="w-3 h-3 rounded bg-emerald-400"></span> Variable (Operación)</div>
+                    </div>
+                </div>
+                <div class="bg-white/5 p-6 rounded-3xl border border-white/10 h-[300px]">
+                    <canvas id="counterfactualChart"></canvas>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="estructura" class="py-20 bg-white">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="mb-16">
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">1. Ahorros por Driver (Función)</h3>
+                <div class="bg-white p-6 rounded-3xl card-shadow border border-slate-100 h-[400px]">
+                    <canvas id="waterfallChart"></canvas>
+                </div>
+            </div>
+            <div>
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-emerald-500 pl-4">2. Ahorros por Conceptos</h3>
+                <div class="grid md:grid-cols-12 gap-8">
+                    <div class="md:col-span-4 space-y-4">
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="text-xs font-bold text-slate-400 uppercase">Mayor Ahorro</div>
+                            <div class="text-lg font-bold text-slate-800">Remuneraciones</div>
+                            <div class="text-sm text-emerald-600 font-bold">-$530 MM</div>
+                        </div>
+                        <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
+                            <div class="text-xs font-bold text-slate-400 uppercase">Eficiencia Fija</div>
+                            <div class="text-lg font-bold text-slate-800">Arriendos</div>
+                            <div class="text-sm text-emerald-600 font-bold">-$480 MM</div>
+                        </div>
+                    </div>
+                    <div class="md:col-span-8 bg-white p-6 rounded-3xl card-shadow border border-slate-100 h-[400px]">
+                        <canvas id="conceptWaterfallChart"></canvas>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="iniciativas" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-3xl font-bold text-slate-900 text-center mb-12">Iniciativas Genéricas de Ahorros</h2>
+            <div class="grid md:grid-cols-3 gap-6">
+                
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:-translate-y-1 transition group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="text-red-500 text-4xl bg-red-50 p-3 rounded-xl">🏢</div>
+                        <span class="bg-red-100 text-red-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Fijo</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">Instalaciones</h3>
+                    <p class="text-sm text-slate-500 mb-6">Optimización de metros cuadrados y contratos de servicio.</p>
+                    
+                    <div class="bg-slate-50 rounded-lg p-4 mb-4 border border-slate-100">
+                        <p class="text-[10px] uppercase font-bold text-slate-400 mb-2 tracking-wider">Conceptos Clave:</p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc pl-3">
+                            <li>Arriendos de Bodegas y Oficinas</li>
+                            <li>Mantención e Infraestructura</li>
+                            <li>Servicios Básicos (Luz/Agua)</li>
+                            <li>Seguridad y Vigilancia</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-4 mt-auto">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-400 font-medium">Impacto estimado</span>
+                            <span class="font-bold text-emerald-600 text-sm">-30% Gasto Fijo</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:-translate-y-1 transition group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="text-amber-500 text-4xl bg-amber-50 p-3 rounded-xl">👥</div>
+                        <span class="bg-amber-100 text-amber-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Mixto</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">Dotación</h3>
+                    <p class="text-sm text-slate-500 mb-6">Adecuación de estructura organizacional al volumen de 155k.</p>
+                    
+                    <div class="bg-slate-50 rounded-lg p-4 mb-4 border border-slate-100">
+                        <p class="text-[10px] uppercase font-bold text-slate-400 mb-2 tracking-wider">Conceptos Clave:</p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc pl-3">
+                            <li>Remuneraciones Fijas</li>
+                            <li>Horas Extra y Bonos</li>
+                            <li>Casino y Alimentación</li>
+                            <li>Capacitaciones</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-4 mt-auto">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-400 font-medium">Impacto estimado</span>
+                            <span class="font-bold text-emerald-600 text-sm">-12% Remuneraciones</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="bg-white p-8 rounded-2xl shadow-sm border border-slate-200 hover:-translate-y-1 transition group">
+                    <div class="flex justify-between items-start mb-4">
+                        <div class="text-blue-500 text-4xl bg-blue-50 p-3 rounded-xl">📉</div>
+                        <span class="bg-blue-100 text-blue-700 text-[10px] font-bold px-2 py-1 rounded uppercase">Variable</span>
+                    </div>
+                    <h3 class="font-bold text-lg mb-2 text-slate-800">Comercial</h3>
+                    <p class="text-sm text-slate-500 mb-6">Eficiencias operativas y renegociación de variables.</p>
+                    
+                    <div class="bg-slate-50 rounded-lg p-4 mb-4 border border-slate-100">
+                        <p class="text-[10px] uppercase font-bold text-slate-400 mb-2 tracking-wider">Conceptos Clave:</p>
+                        <ul class="text-xs text-slate-600 space-y-1.5 list-disc pl-3">
+                            <li>Seguro de Crédito y Ventas</li>
+                            <li>Asesorías técnicas</li>
+                            <li>Gastos de Viaje y Representación</li>
+                            <li>Innovación y marketing</li>
+                        </ul>
+                    </div>
+
+                    <div class="border-t border-slate-100 pt-4 mt-auto">
+                        <div class="flex justify-between items-center">
+                            <span class="text-xs text-slate-400 font-medium">Impacto estimado</span>
+                            <span class="font-bold text-emerald-600 text-sm">-27% Gasto Variable</span>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <section id="simulador" class="py-24 bg-slate-900 text-white relative">
+        <div class="max-w-6xl mx-auto px-6">
+            
+            <div class="mb-16">
+                <h2 class="text-3xl font-bold text-center mb-4">Comportamiento del Costo Unitario</h2>
+                <p class="text-center text-slate-400 mb-8">Análisis de Dilución: Fijo vs Variable</p>
+                
+                <div class="bg-white p-6 rounded-3xl h-[450px]">
+                    <canvas id="sensitivityChart"></canvas>
+                </div>
+                <div class="flex justify-center gap-6 mt-6 text-sm">
+                    <div class="flex items-center gap-2"><span class="w-3 h-1 bg-blue-500"></span> Costo Fijo (Dilución)</div>
+                    <div class="flex items-center gap-2"><span class="w-3 h-1 bg-amber-500"></span> Costo Variable (Piso)</div>
+                    <div class="flex items-center gap-2"><span class="w-3 h-3 bg-emerald-500 rounded-full"></span> Costo Total</div>
+                </div>
+            </div>
+
+            <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl p-8 md:p-12 shadow-2xl text-center">
+                <h2 class="text-3xl font-bold mb-2">Simulador de Impacto EBITDA</h2>
+                <p class="text-blue-200 mb-8">Mueve el control para ver el efecto del volumen.</p>
+                
+                <div class="bg-white text-slate-800 rounded-2xl p-8 max-w-3xl mx-auto shadow-lg">
+                    <div class="mb-8">
+                        <label class="block text-sm font-bold text-slate-500 mb-2 uppercase">Volumen Real (Ton)</label>
+                        <div class="text-5xl font-bold text-blue-600 mb-4" id="volDisplay">155.000</div>
+                        <input type="range" min="100000" max="220000" step="1000" value="155000" class="w-full h-4 bg-slate-200 rounded-lg appearance-none cursor-pointer accent-blue-600" id="volSlider">
+                    </div>
+                    
+                    <div class="grid grid-cols-2 gap-8 border-t border-slate-100 pt-8">
+                        <div>
+                            <p class="text-xs font-bold text-slate-400 uppercase">Costo Unitario Resultante</p>
+                            <p class="text-2xl font-bold text-slate-800" id="unitCostDisplay">$31.711</p>
+                        </div>
+                        <div id="impactBox" class="rounded-xl p-2">
+                            <p class="text-xs font-bold text-slate-400 uppercase">Impacto Caja</p>
+                            <p class="text-2xl font-black" id="impactDisplay">$0 MM</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <footer class="bg-slate-950 text-slate-500 py-12 text-center text-xs border-t border-slate-900">
+        <p>© 2025 Gerencia de Finanzas • Documento Confidencial</p>
+    </footer>
+
+    <script>
+        // --- 1. CONFIGURACIÓN GLOBAL ---
+        Chart.register(ChartDataLabels); 
+        const formatCLP = (val) => new Intl.NumberFormat('es-CL', { maximumFractionDigits: 0 }).format(val);
+        const formatCurrency = (val) => '$' + formatCLP(val);
+
+        // --- 2. CHART RESUMEN (DONA) ---
+        new Chart(document.getElementById('executiveChart'), {
+            type: 'doughnut',
+            data: {
+                labels: ['Ventas', 'Instalaciones', 'Dotación', 'Otros'],
+                datasets: [{
+                    data: [750, 650, 300, 176], 
+                    backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#cbd5e1'],
+                    borderWidth: 0, hoverOffset: 4
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false, cutout: '75%', 
+                plugins: { legend: { display: false }, datalabels: { display: false } }
+            }
+        });
+
+        // --- 3. CHART CONTRAFACTUAL (STACKED) ---
+        new Chart(document.getElementById('counterfactualChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Sin Plan (Inercia)', 'Con Plan (Vitra)'],
+                datasets: [
+                    {
+                        label: 'Costo Fijo (Estructura)',
+                        data: [36429, 24328], 
+                        backgroundColor: '#3b82f6', 
+                        borderRadius: 4, stack: 'Stack 0'
+                    },
+                    {
+                        label: 'Costo Variable (Operación)',
+                        data: [7383, 7383], 
+                        backgroundColor: '#34d399', 
+                        borderRadius: 4, stack: 'Stack 0'
+                    }
+                ]
+            },
+            options: {
+                indexAxis: 'y', responsive: true, maintainAspectRatio: false,
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        color: 'white', font: { weight: 'bold', size: 12 },
+                        formatter: (val) => formatCurrency(val)
+                    },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => ctx.dataset.label + ': ' + formatCurrency(ctx.raw),
+                            afterBody: (ctx) => {
+                                let total = ctx.reduce((acc, curr) => acc + curr.raw, 0);
+                                return '----------------\nTOTAL: ' + formatCurrency(total);
+                            }
+                        }
+                    }
+                },
+                scales: {
+                    x: { stacked: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#94a3b8', callback: (val) => '$' + val/1000 + 'k' } },
+                    y: { stacked: true, grid: { display: false }, ticks: { color: 'white', font: { weight: 'bold', size: 12 } } }
+                }
+            },
+            plugins: [ChartDataLabels]
+        });
+
+        // --- 4. WATERFALLS ---
+        // Funcional
+        new Chart(document.getElementById('waterfallChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Base 2025', 'Eficiencia Ventas', 'Instalaciones', 'Dotación', 'Otros', 'Meta 2026'],
+                datasets: [{
+                    data: [ [0, 6791], [6041, 6791], [5391, 6041], [5091, 5391], [4915, 5091], [0, 4915] ],
+                    backgroundColor: ['#94a3b8', '#ef4444', '#ef4444', '#ef4444', '#ef4444', '#10b981'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, datalabels: { 
+                    color: (ctx) => ctx.dataIndex === 0 || ctx.dataIndex === 5 ? '#1e293b' : '#ffffff',
+                    font: { weight: 'bold' },
+                    formatter: (val, ctx) => (ctx.dataIndex === 0 || ctx.dataIndex === 5) ? formatCurrency(val[1]-val[0]) : '-' + formatCurrency(val[1]-val[0])
+                }},
+                scales: { y: { ticks: { callback: (val) => formatCurrency(val) } }, x: { grid: { display: false } } }
+            }
+        });
+
+        // Contable
+        new Chart(document.getElementById('conceptWaterfallChart'), {
+            type: 'bar',
+            data: {
+                labels: ['Gasto 2025', 'Remuneraciones', 'Arriendos', 'Asesorías', 'Otros', 'Gasto 2026'],
+                datasets: [{
+                    data: [ [0, 6791], [6261, 6791], [5781, 6261], [5481, 5781], [4915, 5481], [0, 4915] ],
+                    backgroundColor: ['#64748b', '#f59e0b', '#f59e0b', '#f59e0b', '#f59e0b', '#10b981'],
+                    borderRadius: 4
+                }]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                plugins: { legend: { display: false }, datalabels: { 
+                    color: (ctx) => ctx.dataIndex === 0 || ctx.dataIndex === 5 ? '#1e293b' : '#ffffff',
+                    font: { weight: 'bold' },
+                    formatter: (val, ctx) => (ctx.dataIndex === 0 || ctx.dataIndex === 5) ? formatCurrency(val[1]-val[0]) : '-' + formatCurrency(val[1]-val[0])
+                }},
+                scales: { y: { ticks: { callback: (val) => formatCurrency(val) } }, x: { grid: { display: false } } }
+            }
+        });
+
+        // --- 5. SENSIBILIDAD (CURVAS DETALLADAS) ---
+        const volumes = [100000, 110000, 120000, 128000, 140000, 155000, 170000, 190000, 218000];
+        const fixedTotal = 3770785646; // CF Total
+        const varUnit = 7383; // CV Unitario
+
+        // Generar curvas
+        const dataFixedUnit = volumes.map(v => Math.round(fixedTotal/v));
+        const dataVarUnit = volumes.map(v => varUnit); // Línea plana
+        const dataTotalUnit = volumes.map((v, i) => dataFixedUnit[i] + varUnit);
+        
+        new Chart(document.getElementById('sensitivityChart'), {
+            type: 'line',
+            data: {
+                labels: volumes.map(v => formatCLP(v/1000) + 'k'),
+                datasets: [
+                    {
+                        label: 'Costo Total Unitario',
+                        data: dataTotalUnit,
+                        borderColor: '#10b981', // Verde
+                        backgroundColor: '#10b981',
+                        borderWidth: 4, tension: 0.3, pointRadius: 4
+                    },
+                    {
+                        label: 'Costo Fijo Unitario (Estructura)',
+                        data: dataFixedUnit,
+                        borderColor: '#3b82f6', // Azul
+                        borderWidth: 2, borderDash: [5,5], tension: 0.3, pointRadius: 0
+                    },
+                    {
+                        label: 'Costo Variable Unitario (Piso)',
+                        data: dataVarUnit,
+                        borderColor: '#f59e0b', // Naranja
+                        borderWidth: 2, borderDash: [2,2], tension: 0, pointRadius: 0
+                    }
+                ]
+            },
+            options: {
+                responsive: true, maintainAspectRatio: false,
+                interaction: { mode: 'index', intersect: false },
+                plugins: { 
+                    legend: { display: false }, // Usamos leyenda externa HTML
+                    datalabels: { display: false },
+                    tooltip: {
+                        callbacks: {
+                            label: (ctx) => ctx.dataset.label + ': ' + formatCurrency(ctx.raw)
+                        }
+                    }
+                },
+                scales: { 
+                    y: { 
+                        title: { display: true, text: 'Costo Unitario ($/Ton)' },
+                        ticks: { callback: (val) => formatCurrency(val) } 
+                    },
+                    x: {
+                        title: { display: true, text: 'Volumen (Toneladas)' }
+                    }
+                }
+            }
+        });
+
+        // --- 6. SIMULADOR ---
+        const slider = document.getElementById('volSlider');
+        const volDisplay = document.getElementById('volDisplay');
+        const unitCostDisplay = document.getElementById('unitCostDisplay');
+        const impactDisplay = document.getElementById('impactDisplay');
+        const impactBox = document.getElementById('impactBox');
+
+        function updateSimulation() {
+            let volume = parseInt(slider.value);
+            let realUnit = (fixedTotal / volume) + varUnit;
+            let diff = realUnit - 31711;
+            let impact = diff * volume * -1;
+            let impactMM = Math.round(impact / 1000000);
+
+            volDisplay.innerText = formatCLP(volume);
+            unitCostDisplay.innerText = formatCurrency(Math.round(realUnit));
+            impactDisplay.innerText = (impactMM > 0 ? "+" : "") + formatCurrency(Math.abs(impactMM)) + " MM";
+            
+            // Lógica de color
+            if(impactMM < -10) { 
+                impactBox.className = "rounded-xl p-2 bg-red-100 text-red-700 border border-red-200"; 
+            }
+            else if(impactMM > 10) { 
+                impactBox.className = "rounded-xl p-2 bg-emerald-100 text-emerald-700 border border-emerald-200"; 
+            }
+            else { 
+                impactBox.className = "rounded-xl p-2 bg-slate-100 text-slate-800 border border-slate-200"; 
+            }
+        }
+
+        slider.addEventListener('input', updateSimulation);
+        updateSimulation();
+
+    </script>
+</body>
+</html>
