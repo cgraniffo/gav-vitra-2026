@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Estrategia GAV 2026: Informe Final</title>
+    <title>Estrategia GAV 2026 Vitra</title>
     
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -51,7 +51,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-12 gap-12">
                 <div class="md:col-span-7 flex flex-col justify-center">
-                    <h3 class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-2">Resumen Ejecutivo</h3>
+                    <h3 class="text-blue-600 font-bold text-xs tracking-widest uppercase mb-2">Resumen Ejecutivo Plan</h3>
                     <h2 class="text-3xl font-extrabold text-slate-900 mb-6">El "Empate Técnico" como Victoria</h2>
                     <p class="text-lg text-slate-600 mb-6 leading-relaxed">
                         La caída del <span class="font-bold text-red-500">29% en volumen</span> amenazaba con disparar nuestros costos unitarios. 
@@ -73,7 +73,7 @@
                     </div>
                 </div>
                 <div class="md:col-span-5 bg-slate-50 rounded-2xl p-6 border border-slate-100 relative">
-                    <h4 class="text-sm font-bold text-slate-700 mb-4 text-center">Composición del Ahorro</h4>
+                    <h4 class="text-sm font-bold text-slate-700 mb-4 text-center">Composición del Ahorro según Origen</h4>
                     <div class="h-[220px] relative">
                         <canvas id="executiveChart"></canvas>
                         <div class="absolute inset-0 flex items-center justify-center flex-col pointer-events-none">
@@ -95,7 +95,7 @@
         <div class="max-w-7xl mx-auto px-6">
             <div class="grid md:grid-cols-2 gap-12 items-center">
                 <div>
-                    <span class="text-amber-400 font-bold text-xs tracking-widest uppercase mb-2 inline-block">Valor de la Gestión</span>
+                    <span class="text-amber-400 font-bold text-xs tracking-widest uppercase mb-2 inline-block">Valor del plan</span>
                     <h2 class="text-3xl font-extrabold mb-4">¿Qué pasaría sin este plan?</h2>
                     <p class="text-slate-300 text-lg mb-6">
                         Si mantenemos la estructura 2025 con el volumen bajo de 2026, el Costo Unitario subiría a <span class="text-red-400 font-bold">$43.812</span> por la carga fija.
@@ -118,13 +118,13 @@
     <section id="estructura" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
             <div class="mb-16">
-                <h3 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">1. Ahorros por Driver (Función)</h3>
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-blue-600 pl-4">1. Ahorros por Driver (Base del ahorro)</h3>
                 <div class="bg-white p-6 rounded-3xl card-shadow border border-slate-100 h-[400px]">
                     <canvas id="waterfallChart"></canvas>
                 </div>
             </div>
             <div>
-                <h3 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-emerald-500 pl-4">2. Ahorros por Conceptos</h3>
+                <h3 class="text-2xl font-bold text-slate-900 mb-6 border-l-4 border-emerald-500 pl-4">2. Ahorros por Conceptos de gasto</h3>
                 <div class="grid md:grid-cols-12 gap-8">
                     <div class="md:col-span-4 space-y-4">
                         <div class="p-4 bg-slate-50 rounded-xl border border-slate-200">
@@ -238,7 +238,7 @@
             
             <div class="mb-16">
                 <h2 class="text-3xl font-bold text-center mb-4">Comportamiento del Costo Unitario</h2>
-                <p class="text-center text-slate-400 mb-8">Análisis de Dilución: Fijo vs Variable</p>
+                <p class="text-center text-slate-400 mb-8">Análisis de Dilución: Fijo, Variable y Total</p>
                 
                 <div class="bg-white p-6 rounded-3xl h-[450px]">
                     <canvas id="sensitivityChart"></canvas>
@@ -251,7 +251,7 @@
             </div>
 
             <div class="bg-gradient-to-br from-blue-600 to-blue-800 rounded-3xl p-8 md:p-12 shadow-2xl text-center">
-                <h2 class="text-3xl font-bold mb-2">Simulador de Impacto EBITDA</h2>
+                <h2 class="text-3xl font-bold mb-2">Simulador de Impacto EBIT</h2>
                 <p class="text-blue-200 mb-8">Mueve el control para ver el efecto del volumen.</p>
                 
                 <div class="bg-white text-slate-800 rounded-2xl p-8 max-w-3xl mx-auto shadow-lg">
@@ -267,7 +267,7 @@
                             <p class="text-2xl font-bold text-slate-800" id="unitCostDisplay">$31.711</p>
                         </div>
                         <div id="impactBox" class="rounded-xl p-2">
-                            <p class="text-xs font-bold text-slate-400 uppercase">Impacto Caja</p>
+                            <p class="text-xs font-bold text-slate-400 uppercase">Impacto EBIT</p>
                             <p class="text-2xl font-black" id="impactDisplay">$0 MM</p>
                         </div>
                     </div>
