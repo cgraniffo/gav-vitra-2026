@@ -125,7 +125,155 @@
         </div>
     </section>
 
-    
+    <section id="asin" class="py-20 bg-slate-50 border-t border-slate-200">
+        <div class="max-w-7xl mx-auto px-6">
+            <div class="text-center mb-12">
+                <span class="text-purple-600 font-bold text-xs tracking-widest uppercase bg-purple-50 px-3 py-1 rounded-full border border-purple-100">Optimización Laboral</span>
+                <h2 class="text-3xl font-bold text-slate-900 mt-4">Análisis de Escenarios ASIN</h2>
+                <p class="text-slate-500 mt-2">Impacto financiero proyectado según distintos modelos de ajuste.</p>
+            </div>
+
+            <div class="grid md:grid-cols-12 gap-8 mb-12">
+                <div class="md:col-span-8 bg-white p-8 rounded-3xl shadow-sm border border-slate-200">
+                    <h3 class="text-lg font-bold text-slate-700 mb-6">Comparativa de Costo Total Anual (MM$)</h3>
+                    <div class="h-[300px]">
+                        <canvas id="asinChart"></canvas>
+                    </div>
+                </div>
+                
+                <div class="md:col-span-4 space-y-4">
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 text-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-3 h-3 rounded-full bg-slate-400"></span>
+                            <h4 class="font-bold text-slate-700">1. Cto Anual 2025</h4>
+                        </div>
+                        <p class="text-slate-500 text-xs leading-relaxed">
+                            Costo 2025 estructura actual (sin modificaciones) Administración y Finanzas.
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 text-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-3 h-3 rounded-full bg-blue-600"></span>
+                            <h4 class="font-bold text-slate-700">2. Anual 2026 ASIN sin reduccion</h4>
+                        </div>
+                        <p class="text-slate-500 text-xs leading-relaxed">
+                            Costo 2026 estructura actual (sin modificaciones) Adm. y Finanzas con traspaso a ASIN (supuesto 33% para Vitra).
+                        </p>
+                    </div>
+
+                    <div class="bg-white p-5 rounded-2xl shadow-sm border border-slate-200 text-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-3 h-3 rounded-full bg-emerald-500"></span>
+                            <h4 class="font-bold text-slate-700">3. 2026 anual c/reducción</h4>
+                        </div>
+                        <p class="text-slate-500 text-xs leading-relaxed">
+                            Costo 2026 estructura reducida (con modificaciones) Adm. y Finanzas sin traspaso a ASIN (100% costo Vitra).
+                        </p>
+                    </div>
+
+                    <div class="bg-purple-50 p-5 rounded-2xl shadow-sm border border-purple-200 text-sm">
+                        <div class="flex items-center gap-2 mb-2">
+                            <span class="w-3 h-3 rounded-full bg-purple-600"></span>
+                            <h4 class="font-bold text-purple-700">4. 2026 anual ASIN c/reducción</h4>
+                        </div>
+                        <p class="text-purple-600 text-xs leading-relaxed font-medium">
+                            Costo 2026 estructura reducida (con modificaciones) Adm. y Finanzas con traspaso a ASIN (33% costo Vitra).
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-slate-200">
+                <table class="min-w-full text-sm">
+                    <thead class="bg-slate-50 text-slate-500 font-bold uppercase text-xs">
+                        <tr>
+                            <th class="px-4 py-3 text-left">Gerencia</th>
+                            <th class="px-4 py-3 text-left">Área funcional</th>
+                            <th class="px-4 py-3 text-right">Cant Personas</th>
+                            <th class="px-4 py-3 text-right">Cto Anual 2025</th>
+                            <th class="px-4 py-3 text-right text-blue-600">Anual 2026 ASIN sin reduccion</th>
+                            <th class="px-4 py-3 text-right text-emerald-600">2026 anual c/reducción</th>
+                            <th class="px-4 py-3 text-right text-purple-600 bg-purple-50">2026 anual ASIN c/reducción</th>
+                        </tr>
+                    </thead>
+                    <tbody class="divide-y divide-slate-100">
+                        <tr class="hover:bg-slate-50">
+                            <td class="px-4 py-3 font-medium text-slate-700">Finanzas</td>
+                            <td class="px-4 py-3 text-slate-600">Finanzas</td>
+                            <td class="px-4 py-3 text-right text-slate-500">1</td>
+                            <td class="px-4 py-3 text-right font-mono">81.916.848</td>
+                            <td class="px-4 py-3 text-right font-mono text-blue-600">27.305.616</td>
+                            <td class="px-4 py-3 text-right font-mono text-emerald-600">81.916.848</td>
+                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">27.032.560</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="px-4 py-3 font-medium text-slate-700"></td>
+                            <td class="px-4 py-3 text-slate-600">Tesorería</td>
+                            <td class="px-4 py-3 text-right text-slate-500">2</td>
+                            <td class="px-4 py-3 text-right font-mono">52.637.520</td>
+                            <td class="px-4 py-3 text-right font-mono text-blue-600">17.545.840</td>
+                            <td class="px-4 py-3 text-right font-mono text-emerald-600">17.132.712</td>
+                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">5.653.795</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="px-4 py-3 font-medium text-slate-700"></td>
+                            <td class="px-4 py-3 text-slate-600">Crédito y Cobranzas</td>
+                            <td class="px-4 py-3 text-right text-slate-500">3</td>
+                            <td class="px-4 py-3 text-right font-mono">71.020.464</td>
+                            <td class="px-4 py-3 text-right font-mono text-blue-600">23.673.488</td>
+                            <td class="px-4 py-3 text-right font-mono text-emerald-600">18.876.264</td>
+                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">6.229.167</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50 border-t border-slate-100">
+                            <td class="px-4 py-3 font-medium text-slate-700">Estrategia y Adm</td>
+                            <td class="px-4 py-3 text-slate-600">Administración</td>
+                            <td class="px-4 py-3 text-right text-slate-500">1</td>
+                            <td class="px-4 py-3 text-right font-mono">90.283.608</td>
+                            <td class="px-4 py-3 text-right font-mono text-blue-600">30.094.536</td>
+                            <td class="px-4 py-3 text-right font-mono text-emerald-600">0</td>
+                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">0</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="px-4 py-3 font-medium text-slate-700"></td>
+                            <td class="px-4 py-3 text-slate-600">Control de Gestión</td>
+                            <td class="px-4 py-3 text-right text-slate-500">2</td>
+                            <td class="px-4 py-3 text-right font-mono">51.847.968</td>
+                            <td class="px-4 py-3 text-right font-mono text-blue-600">17.282.656</td>
+                            <td class="px-4 py-3 text-right font-mono text-emerald-600">51.847.968</td>
+                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">17.109.829</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="px-4 py-3 font-medium text-slate-700"></td>
+                            <td class="px-4 py-3 text-slate-600">Contabilidad</td>
+                            <td class="px-4 py-3 text-right text-slate-500">5</td>
+                            <td class="px-4 py-3 text-right font-mono">111.304.932</td>
+                            <td class="px-4 py-3 text-right font-mono text-blue-600">37.101.644</td>
+                            <td class="px-4 py-3 text-right font-mono text-emerald-600">91.987.812</td>
+                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">30.355.978</td>
+                        </tr>
+                        <tr class="hover:bg-slate-50">
+                            <td class="px-4 py-3 font-medium text-slate-700"></td>
+                            <td class="px-4 py-3 text-slate-600">Personas</td>
+                            <td class="px-4 py-3 text-right text-slate-500">3</td>
+                            <td class="px-4 py-3 text-right font-mono">47.698.548</td>
+                            <td class="px-4 py-3 text-right font-mono text-blue-600">15.899.516</td>
+                            <td class="px-4 py-3 text-right font-mono text-emerald-600">33.122.160</td>
+                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">10.930.313</td>
+                        </tr>
+                        <tr class="bg-slate-100 font-bold border-t-2 border-slate-300 text-slate-800">
+                            <td class="px-4 py-4" colspan="2">TOTAL GENERAL</td>
+                            <td class="px-4 py-4 text-right">17</td>
+                            <td class="px-4 py-4 text-right">506.709.888</td>
+                            <td class="px-4 py-4 text-right text-blue-700">168.903.296</td>
+                            <td class="px-4 py-4 text-right text-emerald-700">294.883.764</td>
+                            <td class="px-4 py-4 text-right text-purple-700 bg-purple-100">97.311.642</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </section>
 
     <section id="estructura" class="py-20 bg-white">
         <div class="max-w-7xl mx-auto px-6">
@@ -300,119 +448,6 @@
         </div>
     </section>
 
-
-
-    <section id="asin" class="py-20 bg-slate-50 border-t border-slate-200">
-        <div class="max-w-7xl mx-auto px-6">
-            <div class="text-center mb-12">
-                <span class="text-purple-600 font-bold text-xs tracking-widest uppercase bg-purple-50 px-3 py-1 rounded-full border border-purple-100">Optimización Laboral</span>
-                <h2 class="text-3xl font-bold text-slate-900 mt-4">Análisis de Escenarios ASIN</h2>
-                <p class="text-slate-500 mt-2">Impacto financiero proyectado según distintos modelos de ajuste.</p>
-            </div>
-
-            <div class="bg-white p-8 rounded-3xl shadow-sm border border-slate-200 mb-12">
-                <h3 class="text-lg font-bold text-slate-700 mb-6">Comparativa de Costo Total Anual (MM$)</h3>
-                <div class="h-[300px]">
-                    <canvas id="asinChart"></canvas>
-                </div>
-                <div class="mt-4 text-center text-sm text-slate-500 italic">
-                    El escenario "ASIN Reducido" (Barra Púrpura) representa el modelo de máxima eficiencia ($97 MM).
-                </div>
-            </div>
-
-            <div class="overflow-x-auto bg-white rounded-2xl shadow-sm border border-slate-200">
-                <table class="min-w-full text-sm">
-                    <thead class="bg-slate-50 text-slate-500 font-bold uppercase text-xs">
-                        <tr>
-                            <th class="px-4 py-3 text-left">Gerencia</th>
-                            <th class="px-4 py-3 text-left">Área funcional</th>
-                            <th class="px-4 py-3 text-right">Cant Personas</th>
-                            <th class="px-4 py-3 text-right">Cto Anual 2025</th>
-                            <th class="px-4 py-3 text-right text-blue-600">Anual 2026 ASIN sin reduccion</th>
-                            <th class="px-4 py-3 text-right text-emerald-600">2026 anual c/reducción</th>
-                            <th class="px-4 py-3 text-right text-purple-600 bg-purple-50">2026 anual ASIN c/reducción</th>
-                        </tr>
-                    </thead>
-                    <tbody class="divide-y divide-slate-100">
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-4 py-3 font-medium text-slate-700">Finanzas</td>
-                            <td class="px-4 py-3 text-slate-600">Finanzas</td>
-                            <td class="px-4 py-3 text-right text-slate-500">1</td>
-                            <td class="px-4 py-3 text-right font-mono">81.916.848</td>
-                            <td class="px-4 py-3 text-right font-mono text-blue-600">27.305.616</td>
-                            <td class="px-4 py-3 text-right font-mono text-emerald-600">81.916.848</td>
-                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">27.032.560</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-4 py-3 font-medium text-slate-700"></td>
-                            <td class="px-4 py-3 text-slate-600">Tesorería</td>
-                            <td class="px-4 py-3 text-right text-slate-500">2</td>
-                            <td class="px-4 py-3 text-right font-mono">52.637.520</td>
-                            <td class="px-4 py-3 text-right font-mono text-blue-600">17.545.840</td>
-                            <td class="px-4 py-3 text-right font-mono text-emerald-600">17.132.712</td>
-                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">5.653.795</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-4 py-3 font-medium text-slate-700"></td>
-                            <td class="px-4 py-3 text-slate-600">Crédito y Cobranzas</td>
-                            <td class="px-4 py-3 text-right text-slate-500">3</td>
-                            <td class="px-4 py-3 text-right font-mono">71.020.464</td>
-                            <td class="px-4 py-3 text-right font-mono text-blue-600">23.673.488</td>
-                            <td class="px-4 py-3 text-right font-mono text-emerald-600">18.876.264</td>
-                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">6.229.167</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50 border-t border-slate-100">
-                            <td class="px-4 py-3 font-medium text-slate-700">Estrategia y Adm</td>
-                            <td class="px-4 py-3 text-slate-600">Administración</td>
-                            <td class="px-4 py-3 text-right text-slate-500">1</td>
-                            <td class="px-4 py-3 text-right font-mono">90.283.608</td>
-                            <td class="px-4 py-3 text-right font-mono text-blue-600">30.094.536</td>
-                            <td class="px-4 py-3 text-right font-mono text-emerald-600">0</td>
-                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">0</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-4 py-3 font-medium text-slate-700"></td>
-                            <td class="px-4 py-3 text-slate-600">Control de Gestión</td>
-                            <td class="px-4 py-3 text-right text-slate-500">2</td>
-                            <td class="px-4 py-3 text-right font-mono">51.847.968</td>
-                            <td class="px-4 py-3 text-right font-mono text-blue-600">17.282.656</td>
-                            <td class="px-4 py-3 text-right font-mono text-emerald-600">51.847.968</td>
-                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">17.109.829</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-4 py-3 font-medium text-slate-700"></td>
-                            <td class="px-4 py-3 text-slate-600">Contabilidad</td>
-                            <td class="px-4 py-3 text-right text-slate-500">5</td>
-                            <td class="px-4 py-3 text-right font-mono">111.304.932</td>
-                            <td class="px-4 py-3 text-right font-mono text-blue-600">37.101.644</td>
-                            <td class="px-4 py-3 text-right font-mono text-emerald-600">91.987.812</td>
-                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">30.355.978</td>
-                        </tr>
-                        <tr class="hover:bg-slate-50">
-                            <td class="px-4 py-3 font-medium text-slate-700"></td>
-                            <td class="px-4 py-3 text-slate-600">Personas</td>
-                            <td class="px-4 py-3 text-right text-slate-500">3</td>
-                            <td class="px-4 py-3 text-right font-mono">47.698.548</td>
-                            <td class="px-4 py-3 text-right font-mono text-blue-600">15.899.516</td>
-                            <td class="px-4 py-3 text-right font-mono text-emerald-600">33.122.160</td>
-                            <td class="px-4 py-3 text-right font-mono text-purple-600 font-bold bg-purple-50">10.930.313</td>
-                        </tr>
-                        <tr class="bg-slate-100 font-bold border-t-2 border-slate-300 text-slate-800">
-                            <td class="px-4 py-4" colspan="2">TOTAL GENERAL</td>
-                            <td class="px-4 py-4 text-right">17</td>
-                            <td class="px-4 py-4 text-right">506.709.888</td>
-                            <td class="px-4 py-4 text-right text-blue-700">168.903.296</td>
-                            <td class="px-4 py-4 text-right text-emerald-700">294.883.764</td>
-                            <td class="px-4 py-4 text-right text-purple-700 bg-purple-100">97.311.642</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </section>
-
-
-
     <section id="simulador" class="py-24 bg-slate-900 text-white relative">
         <div class="max-w-6xl mx-auto px-6">
             <div class="mb-16">
@@ -456,7 +491,7 @@
     </footer>
 
     <script>
-        // --- 1. CONFIGURACIÓN GLOBAL ---
+        // --- 1. CONFIG GLOBAL ---
         Chart.register(ChartDataLabels); 
         const formatCLP = (val) => new Intl.NumberFormat('es-CL', { maximumFractionDigits: 0 }).format(val);
         const formatCurrency = (val) => '$' + formatCLP(val);
@@ -466,75 +501,33 @@
             type: 'doughnut',
             data: {
                 labels: ['Ventas', 'Instalaciones', 'Dotación', 'Otros'],
-                datasets: [{
-                    data: [750, 650, 300, 176], 
-                    backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#cbd5e1'],
-                    borderWidth: 0, hoverOffset: 4
-                }]
+                datasets: [{ data: [750, 650, 300, 176], backgroundColor: ['#2563eb', '#10b981', '#f59e0b', '#cbd5e1'], borderWidth: 0, hoverOffset: 4 }]
             },
-            options: {
-                responsive: true, maintainAspectRatio: false, cutout: '75%', 
-                plugins: { legend: { display: false }, datalabels: { display: false } }
-            }
+            options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { display: false }, datalabels: { display: false } } }
         });
 
-        // --- 3. CHART CONTRAFACTUAL (STACKED) ---
+        // --- 3. CHART CONTRAFACTUAL ---
         new Chart(document.getElementById('counterfactualChart'), {
             type: 'bar',
             data: {
                 labels: ['Sin Plan (Inercia)', 'Con Plan (Vitra)'],
                 datasets: [
-                    {
-                        label: 'Costo Fijo (Estructura)',
-                        data: [36429, 24328], 
-                        backgroundColor: '#3b82f6', 
-                        borderRadius: 4, stack: 'Stack 0'
-                    },
-                    {
-                        label: 'Costo Variable (Operación)',
-                        data: [7383, 7383], 
-                        backgroundColor: '#34d399', 
-                        borderRadius: 4, stack: 'Stack 0'
-                    }
+                    { label: 'Costo Fijo (Estructura)', data: [36429, 24328], backgroundColor: '#3b82f6', borderRadius: 4, stack: 'Stack 0' },
+                    { label: 'Costo Variable (Operación)', data: [7383, 7383], backgroundColor: '#34d399', borderRadius: 4, stack: 'Stack 0' }
                 ]
             },
-            options: {
-                indexAxis: 'y', responsive: true, maintainAspectRatio: false,
-                plugins: {
-                    legend: { display: false },
-                    datalabels: {
-                        color: 'white', font: { weight: 'bold', size: 12 },
-                        formatter: (val) => formatCurrency(val)
-                    },
-                    tooltip: {
-                        callbacks: {
-                            label: (ctx) => ctx.dataset.label + ': ' + formatCurrency(ctx.raw),
-                            afterBody: (ctx) => {
-                                let total = ctx.reduce((acc, curr) => acc + curr.raw, 0);
-                                return '----------------\nTOTAL: ' + formatCurrency(total);
-                            }
-                        }
-                    }
-                },
-                scales: {
-                    x: { stacked: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#94a3b8', callback: (val) => '$' + val/1000 + 'k' } },
-                    y: { stacked: true, grid: { display: false }, ticks: { color: 'white', font: { weight: 'bold', size: 12 } } }
-                }
-            },
-            plugins: [ChartDataLabels]
+            options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { color: 'white', font: { weight: 'bold', size: 12 }, formatter: (val) => formatCurrency(val) } }, scales: { x: { stacked: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#94a3b8', callback: (val) => '$' + val/1000 + 'k' } }, y: { stacked: true, grid: { display: false }, ticks: { color: 'white', font: { weight: 'bold', size: 12 } } } } }
         });
 
-        // --- 4. CHART ASIN (NUEVO Y CORREGIDO) ---
+        // --- 4. CHART ASIN (NUEVO) ---
         new Chart(document.getElementById('asinChart'), {
             type: 'bar',
             data: {
-                labels: ['Costo Anual 2025', 'Anual 2026 ASIN sin reduccion', '2026 anual c/reducción', '2026 anual ASIN c/reducción'],
+                labels: ['Cto Anual 2025', 'Anual 2026 ASIN sin reduccion', '2026 anual c/reducción', '2026 anual ASIN c/reducción'],
                 datasets: [{
-                    // Totales corregidos: 506M, 169M, 295M, 97M
                     data: [506709888, 168903296, 294883764, 97311642],
                     backgroundColor: ['#94a3b8', '#3b82f6', '#10b981', '#7c3aed'],
-                    borderRadius: 6, 
-                    barPercentage: 0.6
+                    borderRadius: 6, barPercentage: 0.6
                 }]
             },
             options: {
@@ -543,64 +536,25 @@
                     legend: { display: false },
                     datalabels: {
                         anchor: 'end', align: 'top', color: '#64748b', font: { weight: 'bold' },
-                        // Formateador para Millones (MM)
                         formatter: (val) => '$' + formatCLP(Math.round(val/1000000)) + ' MM'
                     },
                     tooltip: { callbacks: { label: (ctx) => formatCurrency(ctx.raw) } }
                 },
-                scales: { 
-                    y: { 
-                        display: false, 
-                        max: 600000000 // Ajuste de escala
-                    }, 
-                    x: { grid: { display: false } } 
-                }
+                scales: { y: { display: false, max: 600000000 }, x: { grid: { display: false } } }
             }
         });
 
         // --- 5. WATERFALLS ---
-        // Funcional
         new Chart(document.getElementById('waterfallChart'), {
             type: 'bar',
-            data: {
-                labels: ['Base 2025', 'Eficiencias Dotación', 'Eficiencia Instalaciones', 'Eficiencia Ventas',  'Meta 2026'],
-                datasets: [{
-                    data: [ [0, 6791], [5334, 6791], [4990, 5334], [4915, 4990],  [0, 4915] ],
-                    backgroundColor: ['#94a3b8', '#ef4444', '#ef4444', '#ef4444',  '#10b981'],
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: false }, datalabels: { 
-                    color: (ctx) => ctx.dataIndex === 0 || ctx.dataIndex === 5 ? '#1e293b' : '#ffffff',
-                    font: { weight: 'bold' },
-                    formatter: (val, ctx) => (ctx.dataIndex === 0 || ctx.dataIndex === 5) ? formatCurrency(val[1]-val[0]) : '-' + formatCurrency(val[1]-val[0])
-                }},
-                scales: { y: { ticks: { callback: (val) => formatCurrency(val) } }, x: { grid: { display: false } } }
-            }
+            data: { labels: ['Base 2025', 'Eficiencias Dotación', 'Eficiencia Instalaciones', 'Eficiencia Ventas',  'Meta 2026'], datasets: [{ data: [[0, 6791], [5334, 6791], [4990, 5334], [4915, 4990],  [0, 4915]], backgroundColor: ['#94a3b8', '#ef4444', '#ef4444', '#ef4444',  '#10b981'], borderRadius: 4 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { color: (ctx) => ctx.dataIndex === 0 || ctx.dataIndex === 5 ? '#1e293b' : '#ffffff', font: { weight: 'bold' }, formatter: (val, ctx) => (ctx.dataIndex === 0 || ctx.dataIndex === 5) ? formatCurrency(val[1]-val[0]) : '-' + formatCurrency(val[1]-val[0]) } }, scales: { y: { ticks: { callback: (val) => formatCurrency(val) } }, x: { grid: { display: false } } } }
         });
 
-        // Contable
         new Chart(document.getElementById('conceptWaterfallChart'), {
             type: 'bar',
-            data: {
-                labels: ['Gasto 2025', 'Remuneraciones', 'Asesorías', 'Seguros', 'Otros', 'Gasto 2026'],
-                datasets: [{
-                    data: [ [0, 6791], [6091, 6791], [5421, 6091], [5224, 5421], [4915, 5224], [0, 4915] ],
-                    backgroundColor: ['#64748b', '#f59e0b', '#f59e0b', '#f59e0b', '#f59e0b', '#10b981'],
-                    borderRadius: 4
-                }]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                plugins: { legend: { display: false }, datalabels: { 
-                    color: (ctx) => ctx.dataIndex === 0 || ctx.dataIndex === 5 ? '#1e293b' : '#ffffff',
-                    font: { weight: 'bold' },
-                    formatter: (val, ctx) => (ctx.dataIndex === 0 || ctx.dataIndex === 5) ? formatCurrency(val[1]-val[0]) : '-' + formatCurrency(val[1]-val[0])
-                }},
-                scales: { y: { ticks: { callback: (val) => formatCurrency(val) } }, x: { grid: { display: false } } }
-            }
+            data: { labels: ['Gasto 2025', 'Remuneraciones', 'Asesorías', 'Seguros', 'Otros', 'Gasto 2026'], datasets: [{ data: [[0, 6791], [6091, 6791], [5421, 6091], [5224, 5421], [4915, 5224], [0, 4915]], backgroundColor: ['#64748b', '#f59e0b', '#f59e0b', '#f59e0b', '#f59e0b', '#10b981'], borderRadius: 4 }] },
+            options: { responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { color: (ctx) => ctx.dataIndex === 0 || ctx.dataIndex === 5 ? '#1e293b' : '#ffffff', font: { weight: 'bold' }, formatter: (val, ctx) => (ctx.dataIndex === 0 || ctx.dataIndex === 5) ? formatCurrency(val[1]-val[0]) : '-' + formatCurrency(val[1]-val[0]) } }, scales: { y: { ticks: { callback: (val) => formatCurrency(val) } }, x: { grid: { display: false } } } }
         });
 
         // --- 6. SENSIBILIDAD ---
@@ -613,52 +567,8 @@
         
         new Chart(document.getElementById('sensitivityChart'), {
             type: 'line',
-            data: {
-                labels: volumes.map(v => formatCLP(v/1000) + 'k'),
-                datasets: [
-                    {
-                        label: 'Costo Total Unitario ($/Ton)',
-                        data: dataTotalUnit,
-                        borderColor: '#10b981', // Verde
-                        backgroundColor: '#10b981',
-                        borderWidth: 4, tension: 0.3, pointRadius: 4
-                    },
-                    {
-                        label: 'Costo Fijo Unitario (Estructura)',
-                        data: dataFixedUnit,
-                        borderColor: '#3b82f6', // Azul
-                        borderWidth: 2, borderDash: [5,5], tension: 0.3, pointRadius: 0
-                    },
-                    {
-                        label: 'Costo Variable Unitario (Piso)',
-                        data: dataVarUnit,
-                        borderColor: '#f59e0b', // Naranja
-                        borderWidth: 2, borderDash: [2,2], tension: 0, pointRadius: 0
-                    }
-                ]
-            },
-            options: {
-                responsive: true, maintainAspectRatio: false,
-                interaction: { mode: 'index', intersect: false },
-                plugins: { 
-                    legend: { display: false },
-                    datalabels: { display: false },
-                    tooltip: {
-                        callbacks: {
-                            label: (ctx) => ctx.dataset.label + ': ' + formatCurrency(ctx.raw)
-                        }
-                    }
-                },
-                scales: { 
-                    y: { 
-                        title: { display: true, text: 'Costo Unitario ($/Ton)' },
-                        ticks: { callback: (val) => formatCurrency(val) } 
-                    },
-                    x: {
-                        title: { display: true, text: 'Volumen (Toneladas)' }
-                    }
-                }
-            }
+            data: { labels: volumes.map(v => formatCLP(v/1000) + 'k'), datasets: [{ label: 'Costo Total Unitario ($/Ton)', data: dataTotalUnit, borderColor: '#10b981', backgroundColor: '#10b981', borderWidth: 4, tension: 0.3, pointRadius: 4 }, { label: 'Costo Fijo Unitario (Estructura)', data: dataFixedUnit, borderColor: '#3b82f6', borderWidth: 2, borderDash: [5,5], tension: 0.3, pointRadius: 0 }, { label: 'Costo Variable Unitario (Piso)', data: dataVarUnit, borderColor: '#f59e0b', borderWidth: 2, borderDash: [2,2], tension: 0, pointRadius: 0 }] },
+            options: { responsive: true, maintainAspectRatio: false, interaction: { mode: 'index', intersect: false }, plugins: { legend: { display: false }, datalabels: { display: false }, tooltip: { callbacks: { label: (ctx) => ctx.dataset.label + ': ' + formatCurrency(ctx.raw) } } }, scales: { y: { title: { display: true, text: 'Costo Unitario ($/Ton)' }, ticks: { callback: (val) => formatCurrency(val) } }, x: { title: { display: true, text: 'Volumen (Toneladas)' } } } }
         });
 
         // --- 7. SIMULADOR ---
@@ -679,21 +589,12 @@
             unitCostDisplay.innerText = formatCurrency(Math.round(realUnit));
             impactDisplay.innerText = (impactMM > 0 ? "+" : "") + formatCurrency(Math.abs(impactMM)) + " MM";
             
-            // Lógica de color
-            if(impactMM < -10) { 
-                impactBox.className = "rounded-xl p-2 bg-red-100 text-red-700 border border-red-200"; 
-            }
-            else if(impactMM > 10) { 
-                impactBox.className = "rounded-xl p-2 bg-emerald-100 text-emerald-700 border border-emerald-200"; 
-            }
-            else { 
-                impactBox.className = "rounded-xl p-2 bg-slate-100 text-slate-800 border border-slate-200"; 
-            }
+            if(impactMM < -10) { impactBox.className = "rounded-xl p-2 bg-red-100 text-red-700 border border-red-200"; }
+            else if(impactMM > 10) { impactBox.className = "rounded-xl p-2 bg-emerald-100 text-emerald-700 border border-emerald-200"; }
+            else { impactBox.className = "rounded-xl p-2 bg-slate-100 text-slate-800 border border-slate-200"; }
         }
-
         slider.addEventListener('input', updateSimulation);
         updateSimulation();
-
     </script>
 </body>
 </html>
