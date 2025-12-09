@@ -108,10 +108,10 @@
                     <span class="text-amber-400 font-bold text-xs tracking-widest uppercase mb-2 inline-block">Valor del plan</span>
                     <h2 class="text-3xl font-extrabold mb-4">¿Qué pasaría sin este plan?</h2>
                     <p class="text-slate-300 text-lg mb-6">
-                        Si mantenemos la estructura 2025 con el volumen bajo de 2026, el Costo Unitario subiría a <span class="text-red-400 font-bold">$43.812</span> por la carga fija.
+                        Si mantenemos la estructura de GAV 2025 con el volumen bajo de ton 2026, el GAV Unitario total subiría a <span class="text-red-400 font-bold">$43.812</span> por el componente fijo.
                     </p>
                     <p class="text-slate-300 mb-8">
-                        El plan reduce esa carga fija (barra azul), logrando un costo de <strong>$31.711</strong>.
+                        El plan reduce el componente fijo (barra azul), logrando un GAV Total (Var+Fijo) de <strong>$31.711</strong>.
                     </p>
                     <div class="flex gap-4 text-xs font-bold uppercase tracking-wide border-t border-slate-700 pt-4">
                         <div class="flex items-center gap-2"><span class="w-3 h-3 rounded bg-blue-500"></span> Fijo (Estructura)</div>
@@ -516,17 +516,82 @@
             options: { responsive: true, maintainAspectRatio: false, cutout: '75%', plugins: { legend: { display: false }, datalabels: { display: false } } }
         });
 
-        // --- 3. CHART CONTRAFACTUAL ---
+        // --- 3. CHART CONTRAFACTUAL (CON TOTALES) ---
         new Chart(document.getElementById('counterfactualChart'), {
             type: 'bar',
             data: {
                 labels: ['Sin Plan (Inercia)', 'Con Plan (Vitra)'],
                 datasets: [
-                    { label: 'Costo Fijo (Estructura)', data: [36429, 24328], backgroundColor: '#3b82f6', borderRadius: 4, stack: 'Stack 0' },
-                    { label: 'Costo Variable (Operación)', data: [7383, 7383], backgroundColor: '#34d399', borderRadius: 4, stack: 'Stack 0' }
+                    // Dataset 1: Costo Fijo
+                    { 
+                        label: 'Costo Fijo', 
+                        data: [36429, 24328], 
+                        backgroundColor: '#3b82f6', 
+                        borderRadius: 4, 
+                        stack: 'Stack 0',
+                        datalabels: { color: 'white', font: { weight: 'bold' } } // Estilo individual
+                    },
+                    // Dataset 2: Costo Variable
+                    { 
+                        label: 'Costo Variable', 
+                        data: [7383, 7383], 
+                        backgroundColor: '#34d399', 
+                        borderRadius: 4, 
+                        stack: 'Stack 0',
+                        datalabels: { color: 'white', font: { weight: 'bold' } } // Estilo individual
+                    },
+                    // Dataset 3: "Fantasma" (Solo para mostrar el Total)
+                    {
+                        label: 'Total',
+                        data: [0, 0], // Valor 0 para no pintar barra
+                        backgroundColor: 'transparent',
+                        stack: 'Stack 0',
+                        datalabels: {
+                            color: '#475569', // Gris oscuro (Slate-600)
+                            anchor: 'end',
+                            align: 'end',
+                            offset: 5,
+                            font: { weight: 'bold', size: 13 },
+                            formatter: function(value, context) {
+                                // Sumamos manualmente los datasets 0 y 1
+                                const fijo = context.chart.data.datasets[0].data[context.dataIndex];
+                                const variable = context.chart.data.datasets[1].data[context.dataIndex];
+                                return formatCurrency(fijo + variable);
+                            }
+                        }
+                    }
                 ]
             },
-            options: { indexAxis: 'y', responsive: true, maintainAspectRatio: false, plugins: { legend: { display: false }, datalabels: { color: 'white', font: { weight: 'bold', size: 12 }, formatter: (val) => formatCurrency(val) } }, scales: { x: { stacked: true, grid: { color: 'rgba(255,255,255,0.1)' }, ticks: { color: '#94a3b8', callback: (val) => '$' + val/1000 + 'k' } }, y: { stacked: true, grid: { display: false }, ticks: { color: 'white', font: { weight: 'bold', size: 12 } } } } }
+            options: {
+                indexAxis: 'y', // Gráfico Horizontal
+                responsive: true,
+                maintainAspectRatio: false,
+                layout: {
+                    padding: { right: 60 } // Margen extra a la derecha para que quepa el total
+                },
+                plugins: {
+                    legend: { display: false },
+                    datalabels: {
+                        formatter: (val) => val > 0 ? formatCurrency(val) : '' // Solo muestra si es mayor a 0 (excepto el fantasma que tiene su propio formatter)
+                    },
+                    tooltip: {
+                        enabled: false // Desactivamos tooltip para no ensuciar, ya que los datos están visibles
+                    }
+                },
+                scales: {
+                    x: { 
+                        stacked: true, 
+                        grid: { color: 'rgba(255,255,255,0.1)' }, 
+                        ticks: { color: '#94a3b8', callback: (val) => '$' + val/1000 + 'k' } 
+                    },
+                    y: { 
+                        stacked: true, 
+                        grid: { display: false }, 
+                        ticks: { color: 'white', font: { weight: 'bold', size: 12 } } 
+                    }
+                }
+            },
+            plugins: [ChartDataLabels]
         });
 
         // --- 4. CHART ASIN (NUEVO) ---
